@@ -1,0 +1,48 @@
+html {
+  box-sizing: border-box;
+  font-size: 10px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  padding: 0;
+  margin:0;
+  font-family: 'Amatic SC', cursive;
+  background-image: url('../assets/background.png')
+}
+
+h1 {
+  text-align: center;
+  font-size: 10rem;
+  line-height:1;
+  margin-bottom: 0;
+}
+.container {
+  position: absolute;
+  overflow: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-left: 10px solid orange;
+  border-right: 10px solid orange;
+}
+.player {
+  margin:auto;
+  position: absolute;
+  left:0;
+  bottom:0;
+  right:0;
+  width: 50px; /*essential for determining offset*/
+  height: 50px; /*essential for determining offset*/
+}
+.bar {
+  position: absolute;
+  height: 10px;
+  width: 30px;
+  left: 100px;
+  top: 100px;
+}
