@@ -30,19 +30,20 @@ h1 {
   border-left: 10px solid orange;
   border-right: 10px solid orange;
 }
-.player {
+#player {
   margin:auto;
   position: absolute;
   left:0;
   bottom:0;
   right:0;
-  width: 50px; /*essential for determining offset*/
-  height: 50px; /*essential for determining offset*/
+  width: 50; /*essential for determining offset*/
+  height: 50; /*essential for determining offset*/
 }
-.bar {
+#bar {
   position: absolute;
-  height: 10px;
-  width: 30px;
-  left: 100px;
-  top: 100px;
+  height: 30;
+  width: 100;
+  left: 100;
+  top: 100;
+  background-color: red;
 }

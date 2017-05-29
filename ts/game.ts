@@ -3,6 +3,7 @@ class Game {
     private _el: Element = document.querySelector('#body');
     private _name: string = 'HZ Studiepunten Schraper';
     private _player: Player;
+    private _bar: Bar;
     private _collision: Collision;
     private _windowListener: WindowListener;
 
@@ -12,8 +13,10 @@ class Game {
       */
     constructor() {
         this._player = new Player('player.png');
+        this._bar = new Bar();
         this._windowListener = new WindowListener();
         this._collision = new Collision(this);
+        this._bar.render();
         this.render();
     }
     /**

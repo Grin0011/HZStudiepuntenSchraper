@@ -1,11 +1,11 @@
 /** Class representing a player */
 class Player {
-  private _el : any = document.createElement('img');
+  private _el : HTMLImageElement = document.createElement('img');
   private _baseUrl : string = './assets/'
   private _imageName : string;
   private _className : string = 'player';
-  private _xPos : number = 0;
-  private _yPos : number = 0;
+  public _xPos : number = 0;
+  public _yPos : number = 0;
   private _keyboardListener: KeyListener;
 
   /**
@@ -17,7 +17,7 @@ class Player {
     //creating a Dom Element
     const game = document.querySelector('.container');
     this._el.setAttribute('src', this._baseUrl + this._imageName);
-    this._el.className = 'player';
+    this._el.id = 'player';
     game.appendChild(this._el);
     this._keyboardListener = new KeyListener(); //append a keyboardListener
   }

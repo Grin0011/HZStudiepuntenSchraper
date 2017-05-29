@@ -1,3 +1,14 @@
+var Bar = (function () {
+    function Bar() {
+    }
+    Bar.prototype.render = function () {
+        var parent = document.querySelector('.container');
+        var bar = document.createElement('div');
+        bar.id = 'bar';
+        parent.appendChild(bar);
+    };
+    return Bar;
+}());
 var Game = (function () {
     function Game() {
         var _this = this;
@@ -10,8 +21,10 @@ var Game = (function () {
             setTimeout(_this.loop, 1000 / 60);
         };
         this._player = new Player('player.png');
+        this._bar = new Bar();
         this._windowListener = new WindowListener();
         this._collision = new Collision(this);
+        this._bar.render();
         this.render();
     }
     Game.prototype.start = function () {
@@ -67,7 +80,7 @@ var Player = (function () {
         this._imageName = img;
         var game = document.querySelector('.container');
         this._el.setAttribute('src', this._baseUrl + this._imageName);
-        this._el.className = 'player';
+        this._el.id = 'player';
         game.appendChild(this._el);
         this._keyboardListener = new KeyListener();
     }
@@ -118,6 +131,11 @@ var Collision = (function () {
         if (player.offsetLeft >= window.windowWidth) {
             console.log('right border');
         }
+        var playerStyle = document.getElementById('player');
+        var barStyle = document.getElementById('bar');
+        var playerHeight = this._player._yPos + playerStyle.style.height;
+        var playerWidth = this._player._xPos + playerStyle.style.width;
+        var barTop = parseInt(barStyle.style.top);
     };
     return Collision;
 }());
