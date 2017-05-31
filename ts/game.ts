@@ -4,6 +4,7 @@ class Game {
     private _name: string = 'HZ Studiepunten Schraper';
     private _player: Player;
     private _bar: Bar;
+    private _credit: Credit;
     private _collision: Collision;
     private _windowListener: WindowListener;
 
@@ -14,9 +15,11 @@ class Game {
     constructor() {
         this._player = new Player('player.png');
         this._bar = new Bar();
+        this._credit = new Credit();
         this._windowListener = new WindowListener();
         this._collision = new Collision(this);
         this._bar.render();
+        this._credit.render();
         this.render();
     }
     /**
@@ -68,7 +71,7 @@ class Game {
 
     /**
     * Get the bar
-    * @return {Bar} The player value
+    * @return {Bar} The bar value
     */
     get bar(): Bar {
         return this._bar;

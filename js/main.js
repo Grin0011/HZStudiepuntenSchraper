@@ -1,13 +1,33 @@
 var Bar = (function () {
     function Bar() {
+        this._el = document.createElement('div');
     }
     Bar.prototype.render = function () {
         var parent = document.querySelector('.container');
-        var bar = document.createElement('div');
-        bar.id = 'bar';
-        parent.appendChild(bar);
+        this._el;
+        this._el.id = 'bar';
+        parent.appendChild(this._el);
     };
+    Object.defineProperty(Bar.prototype, "el", {
+        get: function () {
+            return this._el;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return Bar;
+}());
+var Credit = (function () {
+    function Credit() {
+        this._el = document.createElement('div');
+    }
+    Credit.prototype.render = function () {
+        var parent = document.querySelector('#bar');
+        this._el;
+        this._el.id = 'credit';
+        parent.appendChild(this._el);
+    };
+    return Credit;
 }());
 var Game = (function () {
     function Game() {
@@ -22,9 +42,11 @@ var Game = (function () {
         };
         this._player = new Player('player.png');
         this._bar = new Bar();
+        this._credit = new Credit();
         this._windowListener = new WindowListener();
         this._collision = new Collision(this);
         this._bar.render();
+        this._credit.render();
         this.render();
     }
     Game.prototype.start = function () {
@@ -75,39 +97,39 @@ var Player = (function () {
         this._el = document.createElement('img');
         this._baseUrl = './assets/';
         this._className = 'player';
-        this._xPos = 0;
-        this._yPos = 0;
+        this.xPos = 0;
+        this.yPos = 0;
         this._imageName = img;
         var game = document.querySelector('.container');
         this._el.setAttribute('src', this._baseUrl + this._imageName);
         this._el.id = 'player';
         game.appendChild(this._el);
-        this._keyboardListener = new KeyListener();
+        this.keyboardListener = new KeyListener();
     }
     Player.prototype.move = function () {
-        var currentMovement = this._keyboardListener.keyevents;
-        if (this._yPos > 0) {
-            this._yPos -= 1;
+        var currentMovement = this.keyboardListener.keyevents;
+        if (this.yPos > 0) {
+            this.yPos -= 1;
         }
-        if (this._yPos < 0) {
-            this._yPos = +1;
+        if (this.yPos < 0) {
+            this.yPos = +1;
         }
         if (currentMovement.up == true) {
-            this._yPos += 5;
+            this.yPos += 5;
         }
         if (currentMovement.down == true) {
-            this._yPos -= 10;
+            this.yPos -= 10;
         }
         if (currentMovement.right == true) {
-            this._xPos += 5;
+            this.xPos += 5;
         }
         else if (currentMovement.left == true) {
-            this._xPos -= 5;
+            this.xPos -= 5;
         }
     };
     Player.prototype.render = function () {
-        this._el.style.bottom = this._yPos + 'px';
-        this._el.style.left = this._xPos + 'px';
+        this._el.style.bottom = this.yPos + 'px';
+        this._el.style.left = this.xPos + 'px';
     };
     Object.defineProperty(Player.prototype, "el", {
         get: function () {
@@ -125,17 +147,19 @@ var Collision = (function () {
     Collision.prototype.collide = function () {
         var window = this._game.windowListener;
         var player = this._game.player.el;
+        var bar = this._game.bar.el;
         if (player.offsetLeft <= 0) {
             console.log('left border');
         }
         if (player.offsetLeft >= window.windowWidth) {
             console.log('right border');
         }
-        var playerStyle = document.getElementById('player');
-        var barStyle = document.getElementById('bar');
-        var playerHeight = this._player._yPos + playerStyle.style.height;
-        var playerWidth = this._player._xPos + playerStyle.style.width;
-        var barTop = parseInt(barStyle.style.top);
+        for (var i = player.offsetLeft + player.offsetWidth; i <= bar.offsetLeft + bar.offsetWidth + player.offsetWidth; i++) {
+            console.log("For loop werkt");
+            if (player.offsetTop + player.offsetHeight == bar.offsetTop) {
+                this._game.player.yPos = window.windowHeight - bar.offsetTop;
+            }
+        }
     };
     return Collision;
 }());

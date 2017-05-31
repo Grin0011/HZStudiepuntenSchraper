@@ -15,7 +15,7 @@ class KeyListener
     * Keyboard handler
     * @param {KeyboardEvent} e - event object
     */
-    private keyUpDownHandler = (e : KeyboardEvent) => {
+    private keyUpDownHandler = (e : KeyboardEvent) => { 
       if(e.type == 'keydown') {
         if (e.key == 'ArrowLeft') this._keyevents.left = true;
         else if (e.key == 'ArrowUp') this._keyevents.up = true;
@@ -29,6 +29,33 @@ class KeyListener
         else if (e.key == 'ArrowRight') this._keyevents.right = false;
         else if (e.key == 'ArrowDown') this._keyevents.down = false;
       }
+      // let delay: number = 200;
+      // if(e.type == 'keydown') {
+      //   if (e.key == 'ArrowLeft') {
+      //     this._keyevents.left = true;
+      //     setTimeout(() => {
+      //       this._keyevents.left = false;
+      //     }, delay)
+      //   } 
+      //   else if (e.key == 'ArrowUp') {
+      //     this._keyevents.up = true;
+      //     setTimeout(() => {
+      //       this._keyevents.up = false;
+      //     }, delay)
+      //   } 
+      //   else if (e.key == 'ArrowRight') {
+      //     this._keyevents.right = true;
+      //     setTimeout(() => {
+      //       this._keyevents.right = false;
+      //     }, delay)
+      //   } 
+      //   else if (e.key == 'ArrowDown') {
+      //     this._keyevents.down = true;
+      //     setTimeout(() => {
+      //       this._keyevents.down = false;
+      //     }, delay)
+      //   } 
+      // }
     }
 
     /**

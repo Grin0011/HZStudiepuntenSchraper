@@ -3,6 +3,7 @@ class Collision{
 
   private _game: Game;
   private _player: Player;
+  private _bar: Bar;
 
   /**
   * Create a collisionListener
@@ -18,6 +19,7 @@ class Collision{
   public collide(){
     const window = this._game.windowListener;
     const player = this._game.player.el;
+    const bar = this._game.bar.el;
     //
     //console.log(player.offsetLeft);
     //
@@ -28,19 +30,32 @@ class Collision{
       console.log('right border'); //stop the game
     }
 
-    const playerStyle = document.getElementById('player');
-    const barStyle = document.getElementById('bar');
-
-    let playerHeight = this._player._yPos + playerStyle.style.height;
-    let playerWidth = this._player._xPos + playerStyle.style.width;
-    let barTop = parseInt(barStyle.style.top);
-
-    // if(playerBottom + playerHeight > barTop) {
-    //   playerBottom = barTop - playerHeight;
-    //   console.log('Jep');
+    // if (player.offsetLeft == bar.offsetLeft) { 
+    //   //console.log(player.offsetWidth);
+    //   //if (player.offsetLeft - player.offsetWidth + bar.offsetWidth == bar.offsetLeft + bar.offsetWidth) {
+    //   if (player.offsetTop + player.offsetHeight == bar.offsetTop) {
+    //     //console.log('Gelijke offset');
+    //     this._game.player._yPos = window.windowHeight - bar.offsetTop;
+    //   }
     // }
-    // playerStyle.style.top = playerBottom + 'px';
-    
-  }
 
+    // if (player.offsetLeft + player.offsetWidth == bar.offsetLeft) {
+    //   if (player.offsetTop + player.offsetHeight == bar.offsetTop) {
+    //     this._game.player._yPos = window.windowHeight - bar.offsetTop;
+    //   }
+    // }
+
+    // if (player.offsetLeft == bar.offsetLeft + bar.offsetWidth) {
+    //   if (player.offsetTop + player.offsetHeight == bar.offsetTop) {
+    //     this._game.player._yPos = window.windowHeight - bar.offsetTop;
+    //   }
+    // }
+    for (var i = player.offsetLeft + player.offsetWidth; i <= bar.offsetLeft + bar.offsetWidth + player.offsetWidth; i++) {
+      console.log("For loop werkt");
+      if (player.offsetTop + player.offsetHeight == bar.offsetTop) {
+        this._game.player.yPos = window.windowHeight - bar.offsetTop;
+        //console.log(this._game.player.keyboardListener.keyevents);
+      }  
+    }
+  }
 }
