@@ -17,7 +17,7 @@ class Game {
         this._bar = new Bar();
         this._credit = new Credit();
         this._windowListener = new WindowListener();
-        this._collision = new Collision(this);
+        this._collision = new Collision(this, this.player);
         this._bar.render();
         this._credit.render();
         this.render();
@@ -75,6 +75,14 @@ class Game {
     */
     get bar(): Bar {
         return this._bar;
+    }
+
+     /**
+    * Get the crecit
+    * @return {Credig} The bar value
+    */
+    get credit(): Credit {
+        return this._credit;
     }
 
     /**

@@ -27,6 +27,13 @@ var Credit = (function () {
         this._el.id = 'credit';
         parent.appendChild(this._el);
     };
+    Object.defineProperty(Credit.prototype, "el", {
+        get: function () {
+            return this._el;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return Credit;
 }());
 var Game = (function () {
@@ -44,7 +51,7 @@ var Game = (function () {
         this._bar = new Bar();
         this._credit = new Credit();
         this._windowListener = new WindowListener();
-        this._collision = new Collision(this);
+        this._collision = new Collision(this, this.player);
         this._bar.render();
         this._credit.render();
         this.render();
@@ -71,6 +78,13 @@ var Game = (function () {
     Object.defineProperty(Game.prototype, "bar", {
         get: function () {
             return this._bar;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Game.prototype, "credit", {
+        get: function () {
+            return this._credit;
         },
         enumerable: true,
         configurable: true
@@ -141,23 +155,34 @@ var Player = (function () {
     return Player;
 }());
 var Collision = (function () {
-    function Collision(game) {
+    function Collision(game, player) {
+        this._keyboardListener = new KeyListener();
         this._game = game;
+        this._player = player;
     }
     Collision.prototype.collide = function () {
         var window = this._game.windowListener;
         var player = this._game.player.el;
         var bar = this._game.bar.el;
+        var credit = this._game.credit.el;
         if (player.offsetLeft <= 0) {
             console.log('left border');
         }
         if (player.offsetLeft >= window.windowWidth) {
             console.log('right border');
         }
-        for (var i = player.offsetLeft + player.offsetWidth; i <= bar.offsetLeft + bar.offsetWidth + player.offsetWidth; i++) {
-            console.log("For loop werkt");
+        if (player.offsetLeft + player.offsetWidth >= bar.offsetLeft && player.offsetLeft <= bar.offsetLeft + bar.offsetWidth) {
             if (player.offsetTop + player.offsetHeight == bar.offsetTop) {
                 this._game.player.yPos = window.windowHeight - bar.offsetTop;
+                if (this._keyboardListener.keyevents.up == true) {
+                    this._player.move();
+                }
+            }
+        }
+        if (player.offsetLeft == credit.offsetLeft + bar.offsetLeft) {
+            console.log("Get the creditLeft");
+            if (player.offsetTop == bar.offsetTop - credit.offsetTop) {
+                console.log("Get the credit");
             }
         }
     };

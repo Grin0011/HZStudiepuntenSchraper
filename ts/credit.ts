@@ -13,4 +13,13 @@ class Credit {
         this._el.id = 'credit';
         parent.appendChild(this._el);
     }
+
+    /**
+    * Get the Element (DOM) representation
+    * @return {any} The el value
+    */
+    get el(): any {
+        return this._el;
+    }
+
 }
