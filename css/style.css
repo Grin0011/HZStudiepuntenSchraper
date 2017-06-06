@@ -28,8 +28,6 @@ h1 {
   right: 0;
   top: 0;
   bottom: 0;
-  border-left: 10px solid orange;
-  border-right: 10px solid orange;
 }
 
 #player {
@@ -42,35 +40,68 @@ h1 {
   height: 50px; /*essential for determining offset*/
   z-index: 2;
 }
-
-#bar {
-  position: absolute;
+.bar {
+position: absolute;
   height: 30px;
   width: 100px;
-  left: 300px;
-  top: 500px;
   background-color: red;
   z-index: 1;
 }
+#bar0 {
+  left: 100px;
+  top: 650px;
+}
 
 #bar1 {
-  position: absolute;
-  height: 30px;
-  width: 100px;
-  left: 600px;
-  top: 250px;
-  background-color: red;
+  left: 275px;
+  top: 550px;
 }
 #bar2 {
-  position: absolute;
-  height: 30px;
-  width: 100px;
-  left: 800px;
+  left: 50px;
+  top: 450px;
+}
+#bar3 {
+  left: 650px;
+  top: 450px;
+}
+#bar4 {
+  left: 300px;
   top: 350px;
-  background-color: red;
+}
+#bar5 {
+  left: 500px;
+  top: 250px;
+}
+#bar6 {
+  left: 200px;
+  top: 175px;
+}
+#bar7 {
+  left: 100px;
+  top: 75px;
+}
+#bar8 {
+  left: 500px;
+  top: 600px;
+}
+#bar9 {
+  left: 800px;
+  top: 300px;
+}
+#bar10 {
+  left: 700px;
+  top: 125px;
+}
+#bar11 {
+  left: 850px;
+  top: 550px;
+}
+#bar12 {
+  left: 425px;
+  top: 100px;
 }
 
-#credit {
+.credit.show {
   position: relative;
   background-image: url('../assets/svg/coin25.svg');
   background-repeat: no-repeat;
@@ -79,4 +110,16 @@ h1 {
   top: -75px;
   left: 35px;
   z-index: 1;
+}
+
+.score {
+  background-color: orange;
+  width: 75px;
+  height: auto;
+  border-radius: 10%;
+  float: right;
+  margin-top: 30px;
+  margin-right: 30px;
+  font-size: 8em;
+  text-align: center;
 }
