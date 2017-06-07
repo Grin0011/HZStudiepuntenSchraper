@@ -61,6 +61,7 @@ var Credit = (function () {
         var currentBar = this.randomBar();
         var barElement = document.querySelector('#bar' + currentBar.getId());
         var creditElement = document.createElement('div');
+        creditElement.id = 'cc';
         creditElement.classList.add(this._className, 'show');
         barElement.appendChild(creditElement);
     };
@@ -85,6 +86,7 @@ var Game = (function () {
         var _this = this;
         this._el = document.querySelector('#body');
         this._name = 'HZ Studiepunten Schraper';
+        this._timeUp = false;
         this.loop = function () {
             _this.move();
             _this.collide();
@@ -103,6 +105,9 @@ var Game = (function () {
         this.render();
         this.renderScore();
     }
+    Game.prototype.randomTime = function (min, max) {
+        return Math.round(Math.random() * (max - min) + min);
+    };
     Game.prototype.createBars = function () {
         this._bars = [
             new Bar(0),
@@ -119,7 +124,6 @@ var Game = (function () {
             new Bar(11),
             new Bar(12)
         ];
-        console.dir(this._bars);
     };
     Game.prototype.start = function () {
         this.loop();
@@ -150,6 +154,13 @@ var Game = (function () {
     Object.defineProperty(Game.prototype, "credit", {
         get: function () {
             return this._credit;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Game.prototype, "score", {
+        get: function () {
+            return this._score;
         },
         enumerable: true,
         configurable: true
@@ -236,7 +247,9 @@ var Score = (function () {
         this._el.innerHTML = String(this._score);
     };
     Score.prototype.addScore = function () {
-        this._score++;
+        console.log('in addscore');
+        this._score += 5;
+        console.log(this._score);
         this._el.innerHTML = String(this._score);
     };
     Score.prototype.render = function () {
@@ -269,13 +282,7 @@ var Collision = (function () {
         var bar10 = this._game.bars[10].el;
         var bar11 = this._game.bars[11].el;
         var bar12 = this._game.bars[12].el;
-        var credit = this._game.credit.el;
-        if (player.offsetLeft <= 0) {
-            console.log('left border');
-        }
-        if (player.offsetLeft >= window.windowWidth) {
-            console.log('right border');
-        }
+        var credit = document.getElementById('cc');
         if (player.offsetLeft + player.offsetWidth >= bar0.offsetLeft && player.offsetLeft <= bar0.offsetLeft + bar0.offsetWidth) {
             if (player.offsetTop + player.offsetHeight == bar0.offsetTop) {
                 this._game.player.yPos = window.windowHeight - bar0.offsetTop;
@@ -360,9 +367,12 @@ var Collision = (function () {
                 this._keyUp();
             }
         }
-        if (player.offsetLeft == credit.offsetLeft + bar1.offsetLeft) {
-            if (player.offsetTop == bar1.offsetTop + credit.offsetTop) {
-                console.log("Get the credit");
+        if (player.offsetLeft + player.offsetWidth >= bar1.offsetLeft + credit.offsetLeft && player.offsetLeft <= bar1.offsetLeft + credit.offsetLeft + credit.offsetWidth) {
+            if (player.offsetTop + player.offsetHeight >= bar1.offsetTop + credit.offsetTop + credit.offsetHeight && player.offsetTop <= bar1.offsetTop + credit.offsetTop) {
+                console.log('score wordt toegevoegd');
+                this._game.score.addScore();
+                credit.remove();
+                this._game.credit.render();
             }
         }
     };
@@ -446,53 +456,5 @@ var WindowListener = (function () {
         configurable: true
     });
     return WindowListener;
-}());
-var Vector = (function () {
-    function Vector(x, y) {
-        if (x === void 0) { x = 0; }
-        if (y === void 0) { y = 0; }
-        this._size = null;
-        this._angle = null;
-        this._x = x;
-        this._y = y;
-    }
-    Vector.prototype.x = function () {
-        return this._x;
-    };
-    Vector.prototype.y = function () {
-        return this._y;
-    };
-    Vector.prototype.size = function () {
-        if (!this._size) {
-            this._size = Math.sqrt(Math.pow(this._x, 2) +
-                Math.pow(this._y, 2));
-        }
-        return this._size;
-    };
-    Vector.prototype.angle = function () {
-        if (!this._angle) {
-            this._size = Math.atan(this._y / this._x);
-        }
-        return this._angle;
-    };
-    Vector.prototype.add = function (input) {
-        return new Vector(this._x + input.x(), this._y + input.y());
-    };
-    Vector.prototype.subtract = function (input) {
-        return new Vector(this._x - input.x(), this._y - input.y());
-    };
-    Vector.prototype.distance = function (input) {
-        return this.subtract(input).size();
-    };
-    Vector.prototype.scale = function (scalar) {
-        return new Vector(this._x * scalar, this._y * scalar);
-    };
-    Vector.prototype.mirror_X = function () {
-        return new Vector(this._x, this._y * -1);
-    };
-    Vector.prototype.mirror_Y = function () {
-        return new Vector(this._x * -1, this._y);
-    };
-    return Vector;
 }());
 //# sourceMappingURL=main.js.map

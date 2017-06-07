@@ -8,6 +8,7 @@ class Game {
     private _collision: Collision;
     private _windowListener: WindowListener;
     private _score: Score;
+    private _timeUp: boolean = false;
 
     /**
      * Create a game
@@ -25,6 +26,15 @@ class Game {
         
         this.render();
         this.renderScore();
+    }
+
+     /**
+     * Renders a random time with a min and a max
+     * @param {number} min - minimal time
+     * @param {number} max - maximal time
+     */
+    private randomTime(min : number, max : number) : number {
+        return Math.round(Math.random() * (max - min) + min);
     }
 
     /**
@@ -46,7 +56,7 @@ class Game {
             new Bar(11),
             new Bar(12)
         ];
-        console.dir(this._bars);
+        //console.dir(this._bars);
     }
 
 
@@ -57,14 +67,24 @@ class Game {
         this.loop();
     }
 
+
+
     /**
     * Game loop 60 frames per seconds
     */
     private loop = () => {
+        // const time = this.randomTime(1000, 5000);
+        // this._credit.render();
+        // setTimeout(() => {
+        //     if(!this._timeUp) this.loop();
+        // }, time);
+
         this.move();
         this.collide();
         this.render();
         setTimeout(this.loop, 1000 / 60);
+
+        
     }
 
     /**
@@ -111,6 +131,14 @@ class Game {
    */
     get credit(): Credit {
         return this._credit;
+    }
+
+    /**
+   * Get the score
+   * @return {Score} The score value
+   */
+    get score(): Score {
+        return this._score;
     }
 
     /**

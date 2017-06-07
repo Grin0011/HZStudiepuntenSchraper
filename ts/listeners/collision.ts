@@ -4,6 +4,7 @@ class Collision {
   private _game: Game;
   private _player: Player
   //private _bar: Bar;
+  private _score: Score;
   private _credit: Credit;
   private _keyboardListener: KeyListener = new KeyListener();
 
@@ -36,18 +37,7 @@ class Collision {
     const bar11 = this._game.bars[11].el;
     const bar12 = this._game.bars[12].el;
     //const bar = document.getElementById('bar')
-    const credit = this._game.credit.el;
-
-
-    //
-    //console.log(player.offsetLeft);
-    //
-    if (player.offsetLeft <= 0) {
-      console.log('left border'); //stop the game
-    }
-    if (player.offsetLeft >= window.windowWidth) {
-      console.log('right border'); //stop the game
-    }
+    const credit = document.getElementById('cc');
 
     /**
      * 
@@ -139,20 +129,21 @@ class Collision {
       }
     }
 
-
-    /**
+  
+  /**
      * 
      * Collision detection with the credits
      * 
      */
-    //console.log(credit.offsetTop);
-    if (player.offsetLeft == credit.offsetLeft + bar1.offsetLeft) {
-      // console.log(player.offsetLeft);
-      // console.log("Get the creditLeft");
-      if (player.offsetTop == bar1.offsetTop + credit.offsetTop) {
-        console.log("Get the credit");
+    if (player.offsetLeft + player.offsetWidth >= bar1.offsetLeft + credit.offsetLeft && player.offsetLeft <= bar1.offsetLeft + credit.offsetLeft + credit.offsetWidth) {
+      if (player.offsetTop + player.offsetHeight >= bar1.offsetTop + credit.offsetTop + credit.offsetHeight && player.offsetTop <= bar1.offsetTop + credit.offsetTop) {
+        console.log('score wordt toegevoegd');
+        this._game.score.addScore();
+        credit.remove();
+        this._game.credit.render();         
       }
     }
+
   }
   private _keyUp() {
     if (this._keyboardListener.keyevents.up == true) {

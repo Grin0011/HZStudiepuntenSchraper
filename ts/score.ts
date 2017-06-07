@@ -25,10 +25,12 @@ class Score{
     }
 
     /**
-     * Add the score with one.
+     * Add the score with five.
      */
     public addScore(){
-        this._score++;
+        console.log('in addscore');
+        this._score += 5;
+        console.log(this._score);
         this._el.innerHTML = String(this._score); //nicer if in render()
     }
 
@@ -42,4 +44,5 @@ class Score{
         this._el.innerHTML = String(this._score);
         this._parent.appendChild(this._el);
     }
+
 }

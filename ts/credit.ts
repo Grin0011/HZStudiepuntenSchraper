@@ -41,6 +41,7 @@ class Credit {
         const barElement = document.querySelector('#bar'+currentBar.getId());
         // maak element
         const creditElement = document.createElement('div');
+        creditElement.id = 'cc';
         creditElement.classList.add(this._className, 'show');
         // voeg element toe aan de bar
         barElement.appendChild(creditElement);

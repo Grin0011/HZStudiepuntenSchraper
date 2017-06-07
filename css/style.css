@@ -41,7 +41,7 @@ h1 {
   z-index: 2;
 }
 .bar {
-position: absolute;
+  position: absolute;
   height: 30px;
   width: 100px;
   background-color: red;
@@ -102,12 +102,12 @@ position: absolute;
 }
 
 .credit.show {
-  position: relative;
-  background-image: url('../assets/svg/coin25.svg');
+  position: absolute;
+  background-image: url('../assets/svg/coin5.svg');
   background-repeat: no-repeat;
   width: 30px;
   height: 30px;
-  top: -75px;
+  top: -100px;
   left: 35px;
   z-index: 1;
 }
