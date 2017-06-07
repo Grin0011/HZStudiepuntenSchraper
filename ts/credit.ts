@@ -3,14 +3,14 @@ class Credit {
     private _amount: number;
     private _game: Game;
     private _el: HTMLElement = document.createElement('div');
-    private _className: string;
-    // private _bars: Array<Bar>;
+    private _className: string = 'credit';
+    private _image: string;
+    private _baseUrl: string = './assets/svg/';
     private _lastBar: Bar;
 
-    constructor(game: Game, className: string) {
+    constructor(game: Game) {
         this._game = game;
-        //this._bars = bars;
-        this._className = className;
+        //this._image = image;
     }
 
     /**
@@ -32,6 +32,7 @@ class Credit {
     }
 
     public render(): void {
+        if (!document.getElementById('cc')) {
         if(this._lastBar !== undefined) {
             const remLastBar = document.querySelector('#bar'+this._lastBar.getId())
             remLastBar.innerHTML = '';
@@ -45,6 +46,6 @@ class Credit {
         creditElement.classList.add(this._className, 'show');
         // voeg element toe aan de bar
         barElement.appendChild(creditElement);
+        }
     }
-
 }

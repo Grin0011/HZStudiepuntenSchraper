@@ -15,7 +15,7 @@ class Game {
      */
     constructor() {
         this._player = new Player('player.png');
-        this._credit = new Credit(this, 'credit');
+        this._credit = new Credit(this);
         this._windowListener = new WindowListener();
         this._collision = new Collision(this, this.player);
         this.createBars();
@@ -78,6 +78,8 @@ class Game {
         // setTimeout(() => {
         //     if(!this._timeUp) this.loop();
         // }, time);
+
+        this._credit.render();
 
         this.move();
         this.collide();

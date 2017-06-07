@@ -32,10 +32,11 @@ var Bar = (function () {
     return Bar;
 }());
 var Credit = (function () {
-    function Credit(game, className) {
+    function Credit(game) {
         this._el = document.createElement('div');
+        this._className = 'credit';
+        this._baseUrl = './assets/svg/';
         this._game = game;
-        this._className = className;
     }
     Object.defineProperty(Credit.prototype, "el", {
         get: function () {
@@ -54,16 +55,18 @@ var Credit = (function () {
         return bar;
     };
     Credit.prototype.render = function () {
-        if (this._lastBar !== undefined) {
-            var remLastBar = document.querySelector('#bar' + this._lastBar.getId());
-            remLastBar.innerHTML = '';
+        if (!document.getElementById('cc')) {
+            if (this._lastBar !== undefined) {
+                var remLastBar = document.querySelector('#bar' + this._lastBar.getId());
+                remLastBar.innerHTML = '';
+            }
+            var currentBar = this.randomBar();
+            var barElement = document.querySelector('#bar' + currentBar.getId());
+            var creditElement = document.createElement('div');
+            creditElement.id = 'cc';
+            creditElement.classList.add(this._className, 'show');
+            barElement.appendChild(creditElement);
         }
-        var currentBar = this.randomBar();
-        var barElement = document.querySelector('#bar' + currentBar.getId());
-        var creditElement = document.createElement('div');
-        creditElement.id = 'cc';
-        creditElement.classList.add(this._className, 'show');
-        barElement.appendChild(creditElement);
     };
     return Credit;
 }());
@@ -88,13 +91,14 @@ var Game = (function () {
         this._name = 'HZ Studiepunten Schraper';
         this._timeUp = false;
         this.loop = function () {
+            _this._credit.render();
             _this.move();
             _this.collide();
             _this.render();
             setTimeout(_this.loop, 1000 / 60);
         };
         this._player = new Player('player.png');
-        this._credit = new Credit(this, 'credit');
+        this._credit = new Credit(this);
         this._windowListener = new WindowListener();
         this._collision = new Collision(this, this.player);
         this.createBars();
@@ -269,110 +273,27 @@ var Collision = (function () {
     Collision.prototype.collide = function () {
         var window = this._game.windowListener;
         var player = this._game.player.el;
-        var bar0 = this._game.bars[0].el;
         var bar1 = this._game.bars[1].el;
-        var bar2 = this._game.bars[2].el;
-        var bar3 = this._game.bars[3].el;
-        var bar4 = this._game.bars[4].el;
-        var bar5 = this._game.bars[5].el;
-        var bar6 = this._game.bars[6].el;
-        var bar7 = this._game.bars[7].el;
-        var bar8 = this._game.bars[8].el;
-        var bar9 = this._game.bars[9].el;
-        var bar10 = this._game.bars[10].el;
-        var bar11 = this._game.bars[11].el;
-        var bar12 = this._game.bars[12].el;
         var credit = document.getElementById('cc');
-        if (player.offsetLeft + player.offsetWidth >= bar0.offsetLeft && player.offsetLeft <= bar0.offsetLeft + bar0.offsetWidth) {
-            if (player.offsetTop + player.offsetHeight == bar0.offsetTop) {
-                this._game.player.yPos = window.windowHeight - bar0.offsetTop;
-                this._keyUp();
+        for (var index in this._game.bars) {
+            if (player.offsetLeft + player.offsetWidth >= this._game.bars[index].el.offsetLeft && player.offsetLeft <= this._game.bars[index].el.offsetLeft + this._game.bars[index].el.offsetWidth) {
+                if (player.offsetTop + player.offsetHeight == this._game.bars[index].el.offsetTop) {
+                    this._game.player.yPos = window.windowHeight - this._game.bars[index].el.offsetTop;
+                    this._keyUp();
+                }
             }
         }
-        if (player.offsetLeft + player.offsetWidth >= bar1.offsetLeft && player.offsetLeft <= bar1.offsetLeft + bar1.offsetWidth) {
-            if (player.offsetTop + player.offsetHeight == bar1.offsetTop) {
-                this._game.player.yPos = window.windowHeight - bar1.offsetTop;
-                this._keyUp();
-            }
-        }
-        if (player.offsetLeft + player.offsetWidth >= bar2.offsetLeft && player.offsetLeft <= bar2.offsetLeft + bar2.offsetWidth) {
-            if (player.offsetTop + player.offsetHeight == bar2.offsetTop) {
-                this._game.player.yPos = window.windowHeight - bar2.offsetTop;
-                this._keyUp();
-            }
-        }
-        if (player.offsetLeft + player.offsetWidth >= bar3.offsetLeft && player.offsetLeft <= bar3.offsetLeft + bar3.offsetWidth) {
-            if (player.offsetTop + player.offsetHeight == bar3.offsetTop) {
-                this._game.player.yPos = window.windowHeight - bar3.offsetTop;
-                this._keyUp();
-            }
-        }
-        if (player.offsetLeft + player.offsetWidth >= bar4.offsetLeft && player.offsetLeft <= bar4.offsetLeft + bar4.offsetWidth) {
-            if (player.offsetTop + player.offsetHeight == bar4.offsetTop) {
-                this._game.player.yPos = window.windowHeight - bar4.offsetTop;
-                this._keyUp();
-            }
-        }
-        if (player.offsetLeft + player.offsetWidth >= bar5.offsetLeft && player.offsetLeft <= bar5.offsetLeft + bar5.offsetWidth) {
-            if (player.offsetTop + player.offsetHeight == bar5.offsetTop) {
-                this._game.player.yPos = window.windowHeight - bar5.offsetTop;
-                this._keyUp();
-            }
-        }
-        if (player.offsetLeft + player.offsetWidth >= bar6.offsetLeft && player.offsetLeft <= bar6.offsetLeft + bar6.offsetWidth) {
-            if (player.offsetTop + player.offsetHeight == bar6.offsetTop) {
-                this._game.player.yPos = window.windowHeight - bar6.offsetTop;
-                this._keyUp();
-            }
-        }
-        if (player.offsetLeft + player.offsetWidth >= bar7.offsetLeft && player.offsetLeft <= bar7.offsetLeft + bar7.offsetWidth) {
-            if (player.offsetTop + player.offsetHeight == bar7.offsetTop) {
-                this._game.player.yPos = window.windowHeight - bar7.offsetTop;
-                this._keyUp();
-            }
-        }
-        if (player.offsetLeft + player.offsetWidth >= bar8.offsetLeft && player.offsetLeft <= bar8.offsetLeft + bar8.offsetWidth) {
-            if (player.offsetTop + player.offsetHeight == bar8.offsetTop) {
-                this._game.player.yPos = window.windowHeight - bar8.offsetTop;
-                this._keyUp();
-            }
-        }
-        if (player.offsetLeft + player.offsetWidth >= bar9.offsetLeft && player.offsetLeft <= bar9.offsetLeft + bar9.offsetWidth) {
-            if (player.offsetTop + player.offsetHeight == bar9.offsetTop) {
-                this._game.player.yPos = window.windowHeight - bar9.offsetTop;
-                this._keyUp();
-            }
-        }
-        if (player.offsetLeft + player.offsetWidth >= bar9.offsetLeft && player.offsetLeft <= bar9.offsetLeft + bar9.offsetWidth) {
-            if (player.offsetTop + player.offsetHeight == bar9.offsetTop) {
-                this._game.player.yPos = window.windowHeight - bar9.offsetTop;
-                this._keyUp();
-            }
-        }
-        if (player.offsetLeft + player.offsetWidth >= bar10.offsetLeft && player.offsetLeft <= bar10.offsetLeft + bar10.offsetWidth) {
-            if (player.offsetTop + player.offsetHeight == bar10.offsetTop) {
-                this._game.player.yPos = window.windowHeight - bar10.offsetTop;
-                this._keyUp();
-            }
-        }
-        if (player.offsetLeft + player.offsetWidth >= bar11.offsetLeft && player.offsetLeft <= bar11.offsetLeft + bar11.offsetWidth) {
-            if (player.offsetTop + player.offsetHeight == bar11.offsetTop) {
-                this._game.player.yPos = window.windowHeight - bar11.offsetTop;
-                this._keyUp();
-            }
-        }
-        if (player.offsetLeft + player.offsetWidth >= bar12.offsetLeft && player.offsetLeft <= bar12.offsetLeft + bar12.offsetWidth) {
-            if (player.offsetTop + player.offsetHeight == bar12.offsetTop) {
-                this._game.player.yPos = window.windowHeight - bar12.offsetTop;
-                this._keyUp();
-            }
-        }
-        if (player.offsetLeft + player.offsetWidth >= bar1.offsetLeft + credit.offsetLeft && player.offsetLeft <= bar1.offsetLeft + credit.offsetLeft + credit.offsetWidth) {
-            if (player.offsetTop + player.offsetHeight >= bar1.offsetTop + credit.offsetTop + credit.offsetHeight && player.offsetTop <= bar1.offsetTop + credit.offsetTop) {
-                console.log('score wordt toegevoegd');
-                this._game.score.addScore();
-                credit.remove();
-                this._game.credit.render();
+        if (credit) {
+            for (var index in this._game.bars) {
+                if (credit.parentNode == this._game.bars[index].el) {
+                    if (player.offsetLeft + player.offsetWidth >= this._game.bars[index].el.offsetLeft + credit.offsetLeft && player.offsetLeft <= this._game.bars[index].el.offsetLeft + credit.offsetLeft + credit.offsetWidth) {
+                        if (player.offsetTop + player.offsetHeight >= this._game.bars[index].el.offsetTop + credit.offsetTop + credit.offsetHeight && player.offsetTop <= this._game.bars[index].el.offsetTop + credit.offsetTop) {
+                            console.log('score wordt toegevoegd');
+                            this._game.score.addScore();
+                            credit.remove();
+                        }
+                    }
+                }
             }
         }
     };
