@@ -1,5 +1,5 @@
+/** Class representing a credit */
 class Credit {
-
     private _amount: number;
     private _game: Game;
     private _el: HTMLElement = document.createElement('div');
@@ -10,13 +10,12 @@ class Credit {
 
     constructor(game: Game) {
         this._game = game;
-        //this._image = image;
     }
 
     /**
-    * Get the Element (DOM) representation
-    * @return {any} The el value
-    */
+     * Get the Element (DOM) representation
+     * @return {any} The el value
+     */
     get el(): any {
         return this._el;
     }
@@ -33,19 +32,16 @@ class Credit {
 
     public render(): void {
         if (!document.getElementById('cc')) {
-        if(this._lastBar !== undefined) {
-            const remLastBar = document.querySelector('#bar'+this._lastBar.getId())
-            remLastBar.innerHTML = '';
-        }
-        // kies een bar
-        let currentBar = this.randomBar();
-        const barElement = document.querySelector('#bar'+currentBar.getId());
-        // maak element
-        const creditElement = document.createElement('div');
-        creditElement.id = 'cc';
-        creditElement.classList.add(this._className, 'show');
-        // voeg element toe aan de bar
-        barElement.appendChild(creditElement);
+            if (this._lastBar !== undefined) {
+                const remLastBar = document.querySelector('#bar' + this._lastBar.getId())
+                remLastBar.innerHTML = '';
+            }
+            let currentBar = this.randomBar();
+            const barElement = document.querySelector('#bar' + currentBar.getId());
+            const creditElement = document.createElement('div');
+            creditElement.id = 'cc';
+            creditElement.classList.add(this._className, 'show');
+            barElement.appendChild(creditElement);
         }
     }
 }

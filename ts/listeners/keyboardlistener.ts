@@ -3,18 +3,16 @@ class KeyListener
 {
      private _keyevents : any = {left:false, right:false, up:false, down:false} //should be dynamic
 
-    /**
-     * Create a keyboardListener
-     */
+    /** Create a keyboardListener */
     constructor() {
         window.addEventListener("keydown", this.keyUpDownHandler);
         window.addEventListener("keyup", this.keyUpDownHandler);
     }
 
     /**
-    * Keyboard handler
-    * @param {KeyboardEvent} e - event object
-    */
+     * Keyboard handler
+     * @param {KeyboardEvent} e - event object
+     */
     private keyUpDownHandler = (e : KeyboardEvent) => { 
       if(e.type == 'keydown') {
         if (e.key == 'ArrowLeft') this._keyevents.left = true;
@@ -29,41 +27,13 @@ class KeyListener
         else if (e.key == 'ArrowRight') this._keyevents.right = false;
         else if (e.key == 'ArrowDown') this._keyevents.down = false;
       }
-      // let delay: number = 200;
-      // if(e.type == 'keydown') {
-      //   if (e.key == 'ArrowLeft') {
-      //     this._keyevents.left = true;
-      //     setTimeout(() => {
-      //       this._keyevents.left = false;
-      //     }, delay)
-      //   } 
-      //   else if (e.key == 'ArrowUp') {
-      //     this._keyevents.up = true;
-      //     setTimeout(() => {
-      //       this._keyevents.up = false;
-      //     }, delay)
-      //   } 
-      //   else if (e.key == 'ArrowRight') {
-      //     this._keyevents.right = true;
-      //     setTimeout(() => {
-      //       this._keyevents.right = false;
-      //     }, delay)
-      //   } 
-      //   else if (e.key == 'ArrowDown') {
-      //     this._keyevents.down = true;
-      //     setTimeout(() => {
-      //       this._keyevents.down = false;
-      //     }, delay)
-      //   } 
-      // }
     }
 
     /**
-    * Get the keyevents
-    * @return {any} The keyevent value
-    */
+     * Get the keyevents
+     * @return {any} The keyevent value
+     */
     get keyevents(): any{
       return this._keyevents;
     }
-
 }

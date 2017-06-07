@@ -1,15 +1,15 @@
 /** Class representing a scoreboard */
-class Score{
+class Score {
 
-    private _score : number;
-    private _el : Element;
-    private _parent : Element;
+    private _score: number;
+    private _el: Element;
+    private _parent: Element;
 
     /**
      * Create a Scoreboard.
      * @param {Element} element - the parent element
      */
-    constructor(element : Element){
+    constructor(element: Element) {
         this._score = 0;
         this._parent = element;
         this.render();
@@ -19,7 +19,7 @@ class Score{
      * Resets the score of the scoreboard.
      * @param {number} score - The string containing two comma-separated numbers
      */
-    public resetScore(score : number){
+    public resetScore(score: number) {
         this._score = score;
         this._el.innerHTML = String(this._score); //nicer if in render()
     }
@@ -27,7 +27,7 @@ class Score{
     /**
      * Add the score with five.
      */
-    public addScore(){
+    public addScore() {
         console.log('in addscore');
         this._score += 5;
         console.log(this._score);
@@ -37,7 +37,7 @@ class Score{
     /**
      * Renders the DOM representation of scoreboard (better to use a template)
      */
-    public render(){
+    public render() {
         //create scoreboard
         this._el = document.createElement('div');
         this._el.className = 'score';

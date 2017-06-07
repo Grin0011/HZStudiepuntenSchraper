@@ -273,7 +273,6 @@ var Collision = (function () {
     Collision.prototype.collide = function () {
         var window = this._game.windowListener;
         var player = this._game.player.el;
-        var bar1 = this._game.bars[1].el;
         var credit = document.getElementById('cc');
         for (var index in this._game.bars) {
             if (player.offsetLeft + player.offsetWidth >= this._game.bars[index].el.offsetLeft && player.offsetLeft <= this._game.bars[index].el.offsetLeft + this._game.bars[index].el.offsetWidth) {
