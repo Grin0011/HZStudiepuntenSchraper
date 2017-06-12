@@ -74,11 +74,11 @@ h1 {
 }
 #bar6 {
   left: 200px;
-  top: 175px;
+  top: 225px;
 }
 #bar7 {
-  left: 100px;
-  top: 75px;
+  left: 80px;
+  top: 125px;
 }
 #bar8 {
   left: 500px;
@@ -122,4 +122,14 @@ h1 {
   margin-right: 30px;
   font-size: 8em;
   text-align: center;
+}
+
+#infoBar {
+  width: 300px;
+  height: 100px;
+  color: #fff;
+  font-size: 3em;
+  background-color: darkblue;
+  z-index: 100;
+  visibility: hidden;
 }

@@ -1,13 +1,3 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var Bar = (function () {
     function Bar(id) {
         this._el = document.createElement('div');
@@ -70,20 +60,6 @@ var Credit = (function () {
     };
     return Credit;
 }());
-var CreditTweeEnEenHalfEC = (function (_super) {
-    __extends(CreditTweeEnEenHalfEC, _super);
-    function CreditTweeEnEenHalfEC() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return CreditTweeEnEenHalfEC;
-}(Credit));
-var CreditVijfEC = (function (_super) {
-    __extends(CreditVijfEC, _super);
-    function CreditVijfEC() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return CreditVijfEC;
-}(Credit));
 var Game = (function () {
     function Game() {
         var _this = this;
@@ -181,6 +157,10 @@ var Game = (function () {
         gameInformation.className = 'gameInformation';
         this._el.appendChild(gameInformation);
         this._score = new Score(gameInformation);
+        var parent = document.querySelector('.gameInformation');
+        var infoBar = document.createElement('div');
+        infoBar.id = 'infoBar';
+        parent.appendChild(infoBar);
     };
     return Game;
 }());
@@ -242,6 +222,7 @@ var Player = (function () {
 }());
 var Score = (function () {
     function Score(element) {
+        this._infoBar = document.getElementById('infoBar');
         this._score = 0;
         this._parent = element;
         this.render();
@@ -301,6 +282,7 @@ var Collision = (function () {
             this._player.move();
         }
     };
+    Collision.prototype._newPlayerPos = function () { };
     return Collision;
 }());
 var KeyListener = (function () {

@@ -1,3 +1,0 @@
-class CreditVijfEC extends Credit {
-
-}

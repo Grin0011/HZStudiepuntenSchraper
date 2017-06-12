@@ -144,5 +144,10 @@ class Game {
         this._el.appendChild(gameInformation);
 
         this._score = new Score(gameInformation);
+
+        const parent = document.querySelector('.gameInformation');
+        const infoBar = document.createElement('div');
+        infoBar.id = 'infoBar';
+        parent.appendChild(infoBar);
     }
 }

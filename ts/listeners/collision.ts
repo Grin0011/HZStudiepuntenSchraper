@@ -48,6 +48,11 @@ class Collision {
     }
 
     //TODO: Als de player keydown doet dan moet die ook op de bar blijven staan
+
+    //TODO: Melding als player aan de onderkant is 
+      // Syntax Error
+    
+    //TODO: Zorgen dat de player niet uit beeld kan gaan
     
   }
 
@@ -57,4 +62,6 @@ class Collision {
       this._player.move();
     }
   }
+
+  private _newPlayerPos() {}
 }

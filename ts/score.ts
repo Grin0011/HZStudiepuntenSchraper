@@ -3,7 +3,9 @@ class Score {
 
     private _score: number;
     private _el: Element;
+    private _infoBar: HTMLElement = document.getElementById('infoBar');
     private _parent: Element;
+    private _game: Game;
 
     /**
      * Create a Scoreboard.
@@ -44,5 +46,12 @@ class Score {
         this._el.innerHTML = String(this._score);
         this._parent.appendChild(this._el);
     }
+
+    //TODO: Melding als de score 60 is
+        // Je hebt je propodeuse jaar gehaald
+
+    //TODO: Melding als de score 240 is
+        // Je hebt de opleiding gehaald
+        // Reset score
 
 }
